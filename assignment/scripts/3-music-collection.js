@@ -30,6 +30,31 @@ function showCollection(array) {
         console.log(`${values[0]} by ${values[1]} in ${values[2]}`);
     }
 }
-showCollection(collection)
+showCollection(collection)//test showCollection
+
+//create a find artist function
+function findByArtist(artist) {
+    let matchArtist = []
+    for(album in collection) {
+       if(collection[album].artist == artist){
+           matchArtist.push(collection[album])
+       }
+    }
+    return matchArtist;
+}
+//TESTCASES
+console.log(`Search fo Bonobo:`, findByArtist('Bonobo'));
+console.log(`Search for Skrillex.... :`, findByArtist('Skrillex'));
+//testing to be sure it will add more than one album
+addToCollection('Days to Come', 'Bonobo', '2006')
+console.log(`Search for Bonobo:`, findByArtist('Bonobo'));
 
 
+console.log('--------bullshit area----------');
+
+let test = {
+    fuck:[],
+    shit: 'inya butt',
+
+}
+console.log(Object.values(test));
