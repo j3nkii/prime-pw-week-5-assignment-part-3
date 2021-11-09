@@ -20,3 +20,16 @@ console.log(addToCollection('Imaginary Appalacia', 'Colter Wall', '2015'));
 console.log(addToCollection('Redneck Shit', 'Wheeler Walker Jr.', '2016'));
 
 console.log('Your current collection is:', collection);
+
+//showCollection function
+console.log('--------show collection---------');
+function showCollection(array) {
+    console.log(array.length);
+    for(album of array) {
+        let values = Object.values(album)
+        console.log(`${values[0]} by ${values[1]} in ${values[2]}`);
+    }
+}
+showCollection(collection)
+
+
