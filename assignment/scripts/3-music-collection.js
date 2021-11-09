@@ -49,12 +49,20 @@ console.log(`Search for Skrillex.... :`, findByArtist('Skrillex'));
 addToCollection('Days to Come', 'Bonobo', '2006')
 console.log(`Search for Bonobo:`, findByArtist('Bonobo'));
 
+console.log('------STRETCH---------');
 
-console.log('--------bullshit area----------');
+function search(find) {
+    let searchResults = [];
 
-let test = {
-    fuck:[],
-    shit: 'inya butt',
-
+    for(album of collection) {
+        for(item of Object.values(album)) {
+            if(find === item) {
+                searchResults.push(album);
+            }
+            //console.log(item);
+            //console.log(album);
+        }
+    }
+    return searchResults;
 }
-console.log(Object.values(test));
+console.log(search(2015));
