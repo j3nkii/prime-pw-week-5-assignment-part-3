@@ -12,12 +12,12 @@ function addToCollection(title, artist, yearPublished) {
 }
 
 //test func
-console.log(addToCollection('First Born', 'Eyedea & Abilities', '2001'));
-console.log(addToCollection('Traveller', 'Chris Stapleton', '2015'));
-console.log(addToCollection('Most Known Uknown', 'Three 6 Mafia', '2005'));
-console.log(addToCollection('Black Sands', 'Bonobo', '2010'));
-console.log(addToCollection('Imaginary Appalacia', 'Colter Wall', '2015'));
-console.log(addToCollection('Redneck Shit', 'Wheeler Walker Jr.', '2016'));
+console.log(addToCollection('first born', 'eyedea & abilities', '2001'));
+console.log(addToCollection('traveller', 'chris stapleton', '2015'));
+console.log(addToCollection('most known uknown', 'three 6 mafia', '2005'));
+console.log(addToCollection('black sands', 'bonobo', '2010'));
+console.log(addToCollection('imaginary appalacia', 'colter wall', '2015'));
+console.log(addToCollection('redneck shit', 'wheeler walker jr.', '2016'));
 
 console.log('Your current collection is:', collection);
 
@@ -35,6 +35,7 @@ showCollection(collection)//test showCollection
 //create a find artist function
 function findByArtist(artist) {
     let matchArtist = []
+    artist = artist.toLowerCase()
     for(album in collection) {
        if(collection[album].artist == artist){
            matchArtist.push(collection[album])
@@ -53,16 +54,16 @@ console.log('------STRETCH---------');
 
 function search(find) {
     let searchResults = [];
-
+    find = find.toString()
+    find = find.toLowerCase()
     for(album of collection) {
         for(item of Object.values(album)) {
-            if(find === item) {
+            if(item.includes(find)) {
                 searchResults.push(album);
             }
-            //console.log(item);
-            //console.log(album);
         }
     }
     return searchResults;
 }
-console.log(search(2015));
+console.log(search('CHRIS'));//test
+console.log(search('skrillex'));
