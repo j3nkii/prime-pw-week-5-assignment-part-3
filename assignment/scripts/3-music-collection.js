@@ -15,14 +15,14 @@ function addToCollection(albumTitle, albumArtist, albumYear, albumTracks) {
 
 
 
-//test func
+//test func && adding a bunch of albums containing SOME tracks
 console.log('-----Adding-----');
 console.log(addToCollection('First Born', 'Eyedea & Abilities', '2001',[{track: 'One', duration: '2:35'}, {track: 'Music Music', duration: '4:40'}, {track: 'Birth of a Fish', duration: '2:09'},]));
-console.log(addToCollection('Traveller', 'Chris Stapleton', '2015',[{track: 'Traveler', duration: '3:24'}, {track: 'Fire Away', duration: '4:04'}, {track: 'Tennessee Whiskey', duration: '4:53}'},]));
-console.log(addToCollection('Most Known Uknown', 'Three 6 Mafia', '2005',[]));
-console.log(addToCollection('Black Sands', 'Bonobo', '2010',[]));
-console.log(addToCollection('Imaginary Appalacia', 'Colter Wall', '2015',[]));
-console.log(addToCollection('Redneck Shit', 'Wheeler Walker Jr.', '2016',[]));
+console.log(addToCollection('Traveller', 'Chris Stapleton', '2015',[{track: 'Traveler', duration: '3:24'}, {track: 'Fire Away', duration: '4:04'}, {track: 'Tennessee Whiskey', duration: '4:53'},]));
+console.log(addToCollection('Most Known Uknown', 'Three 6 Mafia', '2005',[{track: 'Poppin My Collar', duration: '2:56'}, {track: 'Half on a sack', duration: '3:26'}, ]));
+console.log(addToCollection('Black Sands', 'Bonobo', '2010',[{track: 'Prelude', duration: '1:18'}, {track: 'Kiara', duration: '3:50'}, {track: 'Kong', duration: '3:58'}]));
+console.log(addToCollection('Imaginary Appalacia', 'Colter Wall', '2015',[{track: 'Sleeping on the Blacktop', duration: '3:13'}, {track: 'Caroline', duration: '2:54'}, {track: 'The Devil Wears a Suit and Tie', duration: '3:56'}]));
+console.log(addToCollection('Redneck Shit', 'Wheeler Walker Jr.', '2016',[{track: 'Redneck Shit', duration: '2:24'}, {track: 'Fuck You Bitch', duration: '3:22'}, {track: 'Eatin\' Pussy/Kicckin\' Ass', duration: '3:11'}]));
             //test
             console.log('Your current collection is:', collection);
 
@@ -33,14 +33,14 @@ console.log('--------show collection---------');
 function showCollection(array) {
     console.log(`You have ${collection.length} albums in Collection`);
     for(let albums of array) {
-        let results = '';
-        albums = Object.values(albums)
-        results += `${albums[0]} by ${albums[1]}, published in ${albums[2]}: `;
+        let results = '';       //using for return string
+        albums = Object.values(albums)      //using this so i dont have to type it out everytime
+        results += `${albums[0]} by ${albums[1]}, published in ${albums[2]}:`;
         for(let i in Object.values(albums[3])){
             //parseInt since the i in the for in loop returns as a string 
             //also using template literals to use a new line for each track
             results += `
-${parseInt(i) + 1}: ${Object.values(albums[3][i])[0]}: ${Object.values(albums[3][i])[1]}`
+${parseInt(i) + 1}: ${Object.values(albums[3][i])[0]}: ${Object.values(albums[3][i])[1]}` //the placement of the [i] trips me up, not sure why this works honestly. why does it go inside, and not outside the albums brackets?
         }
           console.log(results);
     }
@@ -66,19 +66,20 @@ function findByArtist(artist) {
             console.log(`Search fo Bonobo:`, findByArtist('Bonobo'));
             console.log(`Search for Skrillex.... :`, findByArtist('Skrillex'));
             //testing to be sure it will add more than one album
-            addToCollection('Days to Come', 'Bonobo', '2006',[]);
+            addToCollection('Days to Come', 'Bonobo', '2006',[{track: 'Intro', duration: '0:54'}, {track: 'Between the Lines', duration: '4:37'},]);
             console.log(`Search for Bonobo:`, findByArtist('Bonobo'));
 
 
 
-console.log('------------STRETCH---------------');
+console.log('------------STRETCH/SEARCH---------------');
 function search(find) {
     let searchResults = [];
     for(let album of collection) {
         for(let item of Object.values(album)) {
+            //making sure item is not object in order to lowercase, then using .includes to make searches less sensitive
             if(typeof item !== 'object' && item.toLowerCase().includes(find.toLowerCase())){
                 searchResults.push(album);
-                //used so there wont be duplicated albums in search
+                //used so there wont be duplicate albums in search
                 break;
             } else if(typeof item === 'object') {
                 for(let track of item){
@@ -95,7 +96,11 @@ function search(find) {
     return searchResults;
 }
             //test
-            console.log(search('traveller'));
-            console.log(search('Fire Away'))
-            console.log(search('One'));
-            console.log(search('skrillex'));
+            console.log('testing case sesnitivity');
+                console.log(search('traVEller'));
+            console.log('testing search for tracks');
+                console.log(search('FIRE'))
+            console.log('testing multiple albums');
+                console.log(search('bonobo'));
+            console.log('testing non existing albums');
+                console.log(search('skrillex'));
