@@ -5,7 +5,7 @@ function addToCollection(albumTitle, albumArtist, albumYear, albumTracks) {
     let album = {
         title: albumTitle,
         artist: albumArtist,
-        //using to srting to make sure input is always a string and can be accsessed as such
+        //using tosrting to make sure input is always a string and can be accsessed as such
         year: albumYear.toString(),
         tracks: albumTracks,
     }
@@ -32,22 +32,20 @@ console.log(addToCollection('Redneck Shit', 'Wheeler Walker Jr.', '2016',[{track
 console.log('--------show collection---------');
 function showCollection(array) {
     console.log(`You have ${collection.length} albums in Collection`);
-    for(let albums of array) {
+    for(let albums of array) {      //iteratin through collection to access different album objects and adding values to the result string
         let results = '';       //using for return string
-        albums = Object.values(albums)      //using this so i dont have to type it out everytime
-        results += `${albums[0]} by ${albums[1]}, published in ${albums[2]}:`;
-        for(let i in Object.values(albums[3])){
+        results += `${albums.title} by ${albums.artist}, published in ${albums.year}:`; 
+        for(let i in albums.tracks){
             //parseInt since the i in the for in loop returns as a string 
             //also using template literals to use a new line for each track
             results += `
-${parseInt(i) + 1}: ${Object.values(albums[3][i])[0]}: ${Object.values(albums[3][i])[1]}` //the placement of the [i] trips me up, not sure why this works honestly. why does it go inside, and not outside the albums brackets?
+${parseInt(i) + 1}: ${Object.values(albums.tracks[i])[0]}: ${Object.values(albums.tracks[i])[1]}` //iterating through tracks using arrays since some albums have more tracks than others
         }
-          console.log(results);
+        console.log(results);
     }
 }
             //test showCollection
             showCollection(collection);
-
 
 
 console.log('-----Find by artist-----');
@@ -96,11 +94,11 @@ function search(find) {
     return searchResults;
 }
             //test
-            console.log('testing case sesnitivity');
+            console.log('testing case sensitivity: traVEller:');
                 console.log(search('traVEller'));
-            console.log('testing search for tracks');
+            console.log('testing search for tracks: FIRE:');
                 console.log(search('FIRE'))
-            console.log('testing multiple albums');
+            console.log('testing multiple albums: bonobo:');
                 console.log(search('bonobo'));
-            console.log('testing non existing albums');
+            console.log('testing non existing albums: skrillex:');
                 console.log(search('skrillex'));
