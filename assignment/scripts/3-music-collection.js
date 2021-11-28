@@ -52,10 +52,10 @@ console.log('-----Find by artist-----');
 //create a find artist function
 function findByArtist(artist) {
     let matchArtist = [];
-    for(let album in collection) {
+    for(let album of collection) {
         //adding toLowercase to decrease search sensitivity
-       if(collection[album].artist.toLowerCase() === artist.toLowerCase()){
-           matchArtist.push(collection[album]);
+       if(album.artist.toLowerCase() === artist.toLowerCase()){
+           matchArtist.push(album);
        }
     }
     return matchArtist;
@@ -72,12 +72,14 @@ function findByArtist(artist) {
 console.log('------------STRETCH/SEARCH---------------');
 function search(find) {
     let searchResults = [];
+    //iterating through collection array for each 'album' inside
     for(let album of collection) {
+        //iterating through each 'album' looking for values matching the search criteria, unless we have another array(tracks).
         for(let item of Object.values(album)) {
             //making sure item is not object in order to lowercase, then using .includes to make searches less sensitive
             if(typeof item !== 'object' && item.toLowerCase().includes(find.toLowerCase())){
                 searchResults.push(album);
-                //used so there wont be duplicate albums in search
+                //used so there wont be duplicate albums in search. 
                 break;
             } else if(typeof item === 'object') {
                 for(let track of item){
@@ -91,14 +93,28 @@ function search(find) {
             
         }
     }
-    return searchResults;
+    return searchResults.length >0 ? searchResults
+            : collection;
 }
             //test
             console.log('testing case sensitivity: traVEller:');
-                console.log(search('traVEller'));
+                console.log(search('chris'));
             console.log('testing search for tracks: FIRE:');
                 console.log(search('FIRE'))
             console.log('testing multiple albums: bonobo:');
                 console.log(search('bonobo'));
             console.log('testing non existing albums: skrillex:');
                 console.log(search('skrillex'));
+
+console.log('-------- start to revised stretch goal -----------');
+function searchVTwo(find) {
+    let searchResults = [];
+    for(let album of collection){
+        if(album.artist === find.artist && album.year === find.year){
+            searchResults.push(album)
+        }
+    }
+    return searchResults;
+}
+
+console.log(searchVTwo({artist: 'Bonobo', year: '2006'}));
