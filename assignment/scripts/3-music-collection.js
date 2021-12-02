@@ -106,15 +106,38 @@ function search(find) {
             console.log('testing non existing albums: skrillex:');
                 console.log(search('skrillex'));
 
+
+
 console.log('-------- start to revised stretch goal -----------');
 function searchVTwo(find) {
+    //function is case sensitive.
     let searchResults = [];
+    if(find === undefined){
+        return collection;
+    }
     for(let album of collection){
-        if(album.artist === find.artist && album.year === find.year){
-            searchResults.push(album)
+        //if key does not exist in find, ignore. if empty, ignore.
+        if((find.artist === undefined ? true 
+                : album.artist.includes(find.artist)) && 
+            (find.year === undefined ? true 
+                :album.year.includes(find.year)) && 
+            (find.title === undefined ? true :
+                album.title.includes(find.title))){
+            if(find.track !== undefined){
+                for(let i in album.tracks){
+                    if(album.tracks[i].track.includes(find.track)){
+                    searchResults.push(album)
+                    }
+                }
+            } else {
+                searchResults.push(album)
+            }
         }
     }
     return searchResults;
 }
 
-console.log(searchVTwo({artist: 'Bonobo', year: '2006'}));
+console.log('track: fire', searchVTwo({track: 'Fire'}));
+console.log('no artist', searchVTwo({artist: ''}));
+console.log('title: days to come', searchVTwo({title: 'Days to Come'}));
+console.log('empty search', searchVTwo());
